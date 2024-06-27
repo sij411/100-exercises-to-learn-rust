@@ -1,3 +1,4 @@
+
 struct Ticket {
     title: String,
     description: String,
@@ -5,19 +6,43 @@ struct Ticket {
 }
 
 impl Ticket {
-    // TODO: implement the `new` function.
     //  The following requirements should be met:
-    //   - Only `To-Do`, `In Progress`, and `Done` statuses are allowed.
-    //   - The `title` and `description` fields should not be empty.
-    //   - the `title` should be at most 50 bytes long.
-    //   - the `description` should be at most 500 bytes long.
+    //   - [ ] Only `To-Do`, `In Progress`, and `Done` statuses are allowed.
+    //   - [x] The `title` and `description` fields should not be empty.
+    //   - [x] the `title` should be at most 50 bytes long.
+    //   - [x] the `description` should be at most 500 bytes long.
     //  The method should panic if any of the requirements are not met.
     //
     // You'll have to use what you learned in the previous exercises,
     // as well as some `String` methods. Use the documentation of Rust's standard library
     // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
+
+
+    fn validate(title: &str, desc: &str) {
+        if title.len() <= 0 {
+            panic!("Title cannot be empty");
+        }
+        if  title.len() > 50 {
+            panic!("Title cannot be longer than 50 characters");
+        }
+        if desc.len() <= 0 {
+            panic!("Description cannot be empty");
+        }
+        if desc.len() > 500 {
+            panic!("Description cannot be longer than 500 characters");
+        }
+    }
+     fn validate_status(status: &str) {
+        let statuses = ["To-Do", "In Progress", "Done"];
+        if !statuses.contains(&status) {
+            panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+        }
+    }
+
+
     fn new(title: String, description: String, status: String) -> Self {
-        todo!();
+        Self::validate(&title, &description);
+        Self::validate_status(&status);
         Self {
             title,
             description,
